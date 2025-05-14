@@ -1,26 +1,25 @@
+import Prod<!-- src/App.vue -->
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <ProductCard
+    name="Керамічна чашка"
+    description="Елегантна чашка ручної роботи, виготовлена в Україні."
+    :price="250"
+    image="https://i.pinimg.com/736x/6e/00/34/6e00347f422be523c534be780ce790e8.jpg"
+  />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import ProductCard from './components/ProductCard.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    ProductCard
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+/* Глобальні стилі, якщо потрібно */
 </style>
+uctCard from './components/ProductCard.vue';
