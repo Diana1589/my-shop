@@ -1,73 +1,45 @@
-<!-- src/components/ProductCard.vue -->
 <template>
   <div class="product-card">
-    <img :src="image" :alt="name" class="product-image" />
+    <img class="product-image" :src="image" :alt="name" />
     <h2>{{ name }}</h2>
     <p>{{ description }}</p>
     <p class="price">{{ price }} грн</p>
-    <button class="buy-button">Купити</button>
+    <button class="buy-button" @click="handleAddToCart">Купити</button>
   </div>
 </template>
 
+
+
+
 <script>
+import { inject } from 'vue';
+
 export default {
   name: 'ProductCard',
   props: {
-    name: {
-      type: String,
-      required: true
-    },
-    description: {
-      type: String,
-      required: true
-    },
-    price: {
-      type: Number,
-      required: true
-    },
-    image: {
-      type: String,
-      required: true
+    image: String,
+    name: String,
+    description: String,
+    price: Number
+  },
+  setup(props) {
+    const addToCart = inject('addToCart');
+
+    function handleAddToCart() {
+      if (addToCart) {
+        addToCart({
+          name: 
+props.name
+,
+          price: props.price,
+          image: props.image
+        });
+      }
     }
+
+    return { handleAddToCart };
   }
 }
 </script>
 
-<style scoped>
-.product-card {
-  max-width: 300px;
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  padding: 20px;
-  margin: 0 auto;
-}
 
-.product-image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.price {
-  font-size: 18px;
-  font-weight: bold;
-  color: #28a745;
-}
-
-.buy-button {
-  background-color: #007bff;
-  color: #fff;
-  font-weight: bold;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-bottom: 20px;
-}
-
-.buy-button:hover {
-  background-color: #0056b3;
-}
-</style>

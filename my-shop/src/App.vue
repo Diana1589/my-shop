@@ -1,25 +1,26 @@
-import Prod<!-- src/App.vue -->
 <template>
-  <ProductCard
-    name="Керамічна чашка"
-    description="Елегантна чашка ручної роботи, виготовлена в Україні."
-    :price="250"
-    image="https://i.pinimg.com/736x/6e/00/34/6e00347f422be523c534be780ce790e8.jpg"
-  />
+<div id="app">
+<h1>Каталог товарів</h1>
+<ProductList />
+<router-view></router-view>
+</div>
 </template>
 
 <script>
-import ProductCard from './components/ProductCard.vue'
+import ProductList from './components/ProductList.vue';
 
 export default {
-  name: 'App',
-  components: {
-    ProductCard
-  }
-}
+name: 'App',
+components: {
+ProductList,
+},
+};
 </script>
 
 <style>
-/* Глобальні стилі, якщо потрібно */
+#app {
+font-family: Avenir, Helvetica, Arial, sans-serif;
+text-align: center;
+margin-top: 50px;
+}
 </style>
-uctCard from './components/ProductCard.vue';
