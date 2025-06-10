@@ -1,13 +1,25 @@
 <template>
-  <div class="product-list">
-    <ProductCard
-      v-for="product in products"
-      :key="product.id"
-      :name="product.name"
-      :description="product.description"
-      :price="product.price"
-      :image="product.image"
+  <div class="product-list-wrapper">
+    <!-- Пошук -->
+    <h2 class="search-title">Пошук товарів</h2>
+    <input
+      v-model="searchQuery"
+      class="search-input"
+      type="text"
+      placeholder="Введіть назву товару"
     />
+
+    <!-- Список карток -->
+    <div class="product-list">
+      <ProductCard
+        v-for="product in filteredProducts"
+        :key="product.id"
+        :name="product.name"
+        :description="product.description"
+        :price="product.price"
+        :image="product.image"
+      />
+    </div>
   </div>
 </template>
 
@@ -16,15 +28,14 @@ import ProductCard from './ProductCard.vue';
 
 export default {
   name: 'ProductList',
-  components: {
-    ProductCard
-  },
+  components: { ProductCard },
   data() {
     return {
+      searchQuery: '',
       products: [
         {
           id: 1,
-          name: 'Годинник Rolex datejust',
+          name: 'Годинник Rolex Datejust',
           description: 'Класичний і надійний швейцарський годинник',
           price: 51500,
           image: 'https://i.pinimg.com/736x/6e/31/63/6e3163ab782e67a8ce66e17338ddc091.jpg'
@@ -73,15 +84,46 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    filteredProducts() {
+      const query = this.searchQuery.trim().toLowerCase();
+      return this.products.filter(p =>
+        p.name.toLowerCase().includes(query)
+      );
+    }
   }
 };
 </script>
 
 <style scoped>
+/* Обгортка */
+.product-list-wrapper {
+  text-align: center;
+  padding: 20px;
+}
+
+/* Заголовок пошуку */
+.search-title {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Поле пошуку */
+.search-input {
+  padding: 8px;
+  font-size: 16px;
+  width: 260px;
+  margin-bottom: 24px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* Сітка карток */
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
+  gap: 24px;
 }
 </style>
